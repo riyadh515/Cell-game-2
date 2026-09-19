@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مختبر العلوم | رحلة داخل الخلية</title>
+<style>
+:root{--n:#102a43;--b:#1976d2;--c:#13b9d8;--g:#2e9d68;--y:#f4b942;--r:#d9534f;--bg:#eef8fc}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#e9f8ff,#f8fbfd);color:var(--n)}
+header{padding:25px 15px;text-align:center;color:#fff;background:linear-gradient(135deg,#102a43,#1976d2,#13b9d8);box-shadow:0 5px 20px #102a4330}
+h1{margin:0;font-size:clamp(28px,6vw,46px)}header p{margin:8px 0 0}
+.wrap{max-width:1000px;margin:22px auto;padding:0 14px}.card{background:#fff;border-radius:25px;padding:24px;box-shadow:0 15px 45px #102a4318;border:1px solid #d9edf5}
+.hidden{display:none!important}.center{text-align:center}
+input{width:min(520px,100%);padding:15px;border:2px solid #cfe3ee;border-radius:14px;font-size:18px}
+button{border:0;border-radius:14px;padding:13px 19px;font-weight:700;font-size:16px;cursor:pointer;transition:.18s}
+button:hover{transform:translateY(-2px)}button:disabled{cursor:default;transform:none}
+.primary{background:linear-gradient(135deg,var(--b),var(--c));color:#fff}.green{background:var(--g);color:#fff}.gold{background:linear-gradient(135deg,var(--y),#ffd968);color:#4b3500}.light{background:#eaf5fa;color:var(--n)}
+.top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.pill{background:#edf6fb;padding:9px 13px;border-radius:999px;font-weight:700}
+.progress{height:12px;background:#e6eef3;border-radius:20px;margin:16px 0;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--c),var(--b));width:0}
+.question{font-size:23px;line-height:1.65;font-weight:800;margin:17px 0}.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.opt{text-align:right;background:#f7fbfd;border:2px solid #dbeaf2;color:var(--n);min-height:60px}.opt.correct{background:#e7f8ef;border-color:#36a86c;color:#17633e}.opt.wrong{background:#fff0ef;border-color:var(--r);color:#8c2520}
+.feedback{margin-top:15px;padding:14px;border-radius:14px;line-height:1.8}.tools{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+.figure{margin:8px auto 18px;max-width:620px;border-radius:20px;background:#f4fbfe;padding:10px;border:1px solid #d9edf5}
+.cell{height:245px;position:relative;border-radius:50%;margin:auto;max-width:430px;background:#dff6c8;border:10px solid #4b9b55;box-shadow:inset 0 0 0 7px #b7df9e}
+.cell.animal{background:#ffe7c4;border-color:#d99048;border-radius:46% 54% 51% 49%}
+.org{position:absolute;border:3px solid #315a70;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.nucleus{width:70px;height:70px;border-radius:50%;background:#c8b6ed;left:43%;top:36%}.chl{width:62px;height:25px;border-radius:50%;background:#5cc66a}.chl.a{left:18%;top:30%}.chl.b{right:17%;top:55%}.vac{width:100px;height:72px;border-radius:40%;background:#b9ecff;right:27%;top:12%}.mit{width:55px;height:28px;border-radius:50%;background:#f4a261}.mit.a{left:20%;bottom:25%}.mit.b{right:12%;bottom:28%}.label{position:absolute;font-size:12px;font-weight:bold}
+.resultNum{font-size:48px;color:var(--b);font-weight:900}.certificate{margin-top:20px;padding:12px;border:10px double var(--b);text-align:center;background:#fff}.certin{border:2px solid var(--y);padding:30px}.student{font-size:32px;color:var(--g);font-weight:900;margin:20px}.certTitle{font-size:38px;font-weight:900}.seal{margin:18px auto;width:85px;height:85px;border:5px solid var(--y);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px}
+@media(max-width:650px){.opts{grid-template-columns:1fr}.card{padding:17px}.question{font-size:20px}.cell{height:210px}}
+@media print{body{background:#fff}.noPrint{display:none!important}.certificate{display:block!important;box-shadow:none}@page{size:A4 landscape;margin:10mm}}
+</style>
+</head>
+<body>
+<header>
+<h1>🔬 مختبر العلوم</h1>
+<p>رحلة تفاعلية داخل الخلية النباتية والحيوانية 🧬</p>
+</header>
+<div class="wrap">
+
+<section id="start" class="card center">
+<h2>🌟 تحدي العلوم</h2>
+<p>لعبة من ألعاب العلوم التعليمية التفاعلية الرقمية والواقعية التي تساعد في فهم المفاهيم العلمية بطريقة ممتعة وبسيطة.</p>
+<input id="name" placeholder="اكتب اسم الطالب">
+<div class="tools"><button class="primary" onclick="start()">🚀 ابدأ التحدي</button><button class="light" onclick="soundTest()">🔊 اختبار الصوت</button></div>
+</section>
+
+<section id="game" class="card hidden">
+<div class="top">
+<span class="pill" id="qn"></span><span class="pill">🏆 <b id="score">0</b></span><span class="pill">❤️ <b id="lives">3</b></span><span class="pill">🔊 الصوت: تشغيل</span>
+</div>
+<div class="progress"><i id="bar"></i></div>
+<div id="pic" class="figure"></div>
+<div id="q" class="question"></div>
+<div id="opts" class="opts"></div>
+<div id="fb"></div>
+<div class="tools"><button id="next" class="primary hidden" onclick="next()">السؤال التالي ←</button><button class="light" onclick="toggleSound()">🔊/🔇</button></div>
+</section>
+
+<section id="result" class="card center hidden">
+<h2>🎉 انتهى التحدي</h2>
+<div class="resultNum" id="final"></div>
+<p id="msg"></p>
+<div class="tools"><button class="gold" onclick="certificate()">🏅 إصدار شهادة الإنجاز</button><button class="light" onclick="location.reload()">🔄 إعادة اللعب</button></div>
+</section>
+
+<section id="cert" class="certificate hidden">
+<div class="certin">
+<div>🧪 مادة العلوم</div><div class="certTitle">🏅 شهادة إنجاز</div>
+<p>تُمنح هذه الشهادة إلى الطالب/ـة</p><div class="student" id="cname"></div>
+<p style="font-size:19px;line-height:2">تقديرًا لإتمام تحدي <b>مختبر العلوم: رحلة داخل الخلية</b><br>والإجابة عن أسئلة الخلايا النباتية والحيوانية ومكوناتها ووظائفها.</p>
+<h2 id="cscore"></h2><div class="seal">🔬</div>
+<p>🌟 استمر في الاكتشاف والتعلم 🌟</p>
+</div>
+</section>
+<div class="tools noPrint"><button id="print" class="green hidden" onclick="window.print()">🖨️ طباعة / حفظ PDF</button></div>
+</div>
+
+<script>
+let sound=true,idx=0,score=0,lives=3,answered=false,student="";
+const qs=[
+{q:"أي تركيب يُعد حاجزًا انتقائيًا ينظم مرور المواد من وإلى الخلية؟",o:["الجدار الخلوي","الغشاء البلازمي","السيتوبلازم","النواة"],a:1,p:10,e:"الغشاء البلازمي ذو نفاذية اختيارية، لذلك ينظم دخول وخروج مواد مختلفة."},
+{q:"خلية تحتوي على جدار خلوي وبلاستيدات خضراء وفجوة عصارية كبيرة. ما الاستنتاج الأدق؟",o:["خلية حيوانية","خلية نباتية","خلية بلا نواة","خلية دم"],a:1,p:10,e:"اجتماع هذه التراكيب الثلاثة من العلامات المميزة للخلية النباتية."},
+{q:"ما الوظيفة التي ترتبط مباشرة بالبلاستيدات الخضراء؟",o:["البناء الضوئي","إنتاج ATP في التنفس الخلوي","تخزين المادة الوراثية","التحكم في نفاذية الغشاء"],a:0,p:10,e:"البلاستيدات الخضراء تحتوي الكلوروفيل وتستقبل الطاقة الضوئية للبناء الضوئي."},
+{q:"إذا توقفت الميتوكوندريا عن العمل، فما العملية التي تتأثر بصورة مباشرة؟",o:["إنتاج معظم الطاقة القابلة للاستخدام","تخزين الماء في الفجوة","نسخ DNA في النواة","تكوين الجدار الخلوي"],a:0,p:10,e:"الميتوكوندريا موقع رئيسي للتنفس الخلوي وإنتاج ATP."},
+{q:"أي تركيب يوجد في الخلية النباتية والحيوانية معًا؟",o:["البلاستيدة الخضراء","الجدار الخلوي","الميتوكوندريا","الفجوة الكبيرة المميزة للنبات"],a:2,p:10,e:"الميتوكوندريا موجودة في الخلايا النباتية والحيوانية."},
+{q:"لماذا تكون الخلية النباتية أكثر ثباتًا في شكلها من الخلية الحيوانية غالبًا؟",o:["لأنها لا تحتوي غشاءً بلازميًا","لوجود الجدار الخلوي","لأنها لا تحتوي نواة","لأنها لا تتنفس"],a:1,p:10,e:"الجدار الخلوي الصلب يوفر دعماً ميكانيكياً ويحافظ على شكل الخلية."},
+{q:"ما العلاقة الأدق بين النواة والمادة الوراثية؟",o:["النواة تحتوي معظم DNA في الخلية حقيقية النواة","النواة تنتج ATP","النواة تخزن الماء فقط","النواة تقوم بالبناء الضوئي"],a:0,p:10,e:"في الخلايا حقيقية النواة توجد معظم المادة الوراثية داخل النواة."},
+{q:"أي تغير يُتوقع حدوثه إذا فقدت خلية نباتية معظم ماء فجوتها؟",o:["قد تفقد الخلية جزءًا من ضغط الامتلاء","تزداد كمية الكلوروفيل فورًا","تختفي النواة","تتحول إلى خلية حيوانية"],a:0,p:10,e:"فقد الماء يقلل ضغط الامتلاء، وقد يؤدي إلى ذبول الأنسجة النباتية."},
+{q:"أي تركيب في الرسم يمثل العضية البنفسجية؟",o:["النواة","الميتوكوندريا","الفجوة","البلاستيدة"],a:0,p:10,e:"في الرسم التوضيحي، العضية البنفسجية الكبيرة تمثل النواة." ,img:"plant"},
+{q:"إذا كان للخلية غشاء بلازمي ولا يوجد لها جدار خلوي أو بلاستيدات خضراء، فأي نوع يمكن أن يكون؟",o:["خلية حيوانية","خلية نباتية ناضجة بالضرورة","بلاستيدة","جدار خلوي"],a:0,p:10,e:"هذه صفات تتوافق مع الخلية الحيوانية." ,img:"animal"},
+{q:"أي عبارة تفسر وجود الميتوكوندريا في الخلايا النباتية رغم وجود البلاستيدات؟",o:["لكل منهما وظيفة مختلفة، والميتوكوندريا مرتبطة بالتنفس الخلوي","الميتوكوندريا تصنع الضوء","البلاستيدات تمنع التنفس","الميتوكوندريا بديل عن النواة"],a:0,p:10,e:"البلاستيدات تقوم بالبناء الضوئي، بينما الميتوكوندريا ترتبط بإطلاق الطاقة من المواد الغذائية."},
+{q:"إذا زاد حجم الفجوة العصارية في خلية نباتية مع ثبات بقية التراكيب، فما الوظيفة المرتبطة بها أكثر؟",o:["تخزين الماء والمواد الذائبة","تكوين DNA","إنتاج الضوء","إنتاج البروتين"],a:0,p:10,e:"الفجوة العصارية تخزن الماء ومواد مختلفة وتساهم في ضغط الامتلاء."},
+{q:"أي وصف يقارن الغشاء البلازمي بالجدار الخلوي بصورة أدق؟",o:["كلاهما يؤديان الوظيفة نفسها تمامًا","الغشاء ينظم المرور، والجدار يوفر دعماً وحماية","الجدار يسمح بكل المواد والغشاء لا يسمح بأي مادة","الغشاء موجود في النبات فقط"],a:1,p:10,e:"الغشاء مسؤول عن التنظيم الانتقائي للمرور، والجدار يمنح دعماً وحماية."},
+{q:"خلية نباتية وُضعت في ظروف أدت إلى فقدها للماء. أي تركيب يتأثر بعلاقته بضغط الامتلاء؟",o:["الفجوة العصارية","النواة فقط","الجدار الخلوي فقط","البلاستيدات فقط"],a:0,p:10,e:"الفجوة العصارية ترتبط بتخزين الماء والحفاظ على ضغط الامتلاء."},
+{q:"أي استنتاج يمكن دعمه من وجود عدد كبير من الميتوكوندريا في خلية معينة؟",o:["قد تحتاج الخلية إلى كمية كبيرة من الطاقة","الخلية لا تحتوي DNA","الخلية لا تتنفس","الخلية تقوم بالبناء الضوئي فقط"],a:0,p:10,e:"كثرة الميتوكوندريا قد ترتبط بارتفاع احتياج الخلية للطاقة."},
+{q:"إذا تعطلت البلاستيدات الخضراء، أي مادة غذائية ستتأثر عملية تصنيعها مباشرة في النبات؟",o:["الجلوكوز","DNA","الأملاح المعدنية فقط","الماء"],a:0,p:10,e:"البناء الضوئي ينتج الجلوكوز من مواد أولية باستخدام الطاقة الضوئية."},
+{q:"أي عبارة أدق عن التشابه بين الخلية النباتية والحيوانية؟",o:["كلتاهما تحتويان على تراكيب أساسية مشتركة مثل الغشاء والنواة والميتوكندريا","كلتاهما تحتويان جدارًا خلويًا","كلتاهما تحتويان بلاستيدات","لا يوجد أي تشابه"],a:0,p:10,e:"هناك تراكيب أساسية مشتركة، مع وجود تراكيب مميزة لكل نوع."},
+{q:"طالب قال: «الجدار الخلوي هو الذي يتحكم في كل ما يدخل الخلية». ما التصحيح؟",o:["صحيح تمامًا","الغشاء البلازمي هو المسؤول عن التنظيم الانتقائي للمرور","النواة تتحكم في مرور الماء","الفجوة تتحكم في جميع المواد"],a:1,p:10,e:"الجدار يوفر الدعم والحماية، بينما الغشاء البلازمي ينظم مرور المواد."},
+{q:"أي ترتيب يربط التركيب بوظيفته بصورة صحيحة؟",o:["النواة—المادة الوراثية","البلاستيدة—تخزين الماء فقط","الميتوكوندريا—حماية الخلية من الخارج","الجدار—إنتاج ATP"],a:0,p:10,e:"النواة تحتوي معظم المادة الوراثية في الخلية حقيقية النواة."},
+{q:"في الرسم النباتي، أي تركيب أخضر بيضاوي يرتبط مباشرة بتحويل الطاقة الضوئية إلى طاقة كيميائية؟",o:["البلاستيدة الخضراء","النواة","الميتوكوندريا","الفجوة"],a:0,p:10,e:"البلاستيدات الخضراء هي موقع البناء الضوئي وتحويل الطاقة الضوئية إلى طاقة كيميائية مخزنة في المركبات العضوية.","img":"plant"}
+];
+
+function start(){student=document.getElementById("name").value.trim();if(!student){alert("اكتب اسم الطالب أولاً 🌟");return}document.getElementById("start").classList.add("hidden");document.getElementById("game").classList.remove("hidden");render()}
+function render(){answered=false;let x=qs[idx];document.getElementById("qn").textContent=`السؤال ${idx+1} من 20`;document.getElementById("score").textContent=score;document.getElementById("lives").textContent=lives;document.getElementById("bar").style.width=(idx/20*100)+"%";document.getElementById("q").textContent=x.q;document.getElementById("fb").innerHTML="";document.getElementById("next").classList.add("hidden");document.getElementById("pic").innerHTML=x.img?drawCell(x.img):"";let box=document.getElementById("opts");box.innerHTML="";x.o.forEach((t,i)=>{let b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>answer(i,b);box.appendChild(b)})}
+function drawCell(type){let animal=type==="animal";return `<div class="cell ${animal?"animal":""}"><div class="org nucleus">النواة</div>${!animal?'<div class="org chl a">بلاستيدة</div><div class="org chl b">بلاستيدة</div><div class="org vac">فجوة</div>':''}<div class="org mit a">ميتوكوندريا</div><div class="org mit b">ميتوكوندريا</div></div><small>رسم توضيحي مبسط — ${animal?"خلية حيوانية":"خلية نباتية"}</small>`}
+function answer(i,btn){if(answered)return;answered=true;let x=qs[idx],bs=document.querySelectorAll(".opt");bs.forEach(b=>b.disabled=true);if(i===x.a){score+=x.p;btn.classList.add("correct");play(true);document.getElementById("fb").innerHTML=`<div class="feedback" style="background:#e8f8ef">✅ إجابة صحيحة! +${x.p} نقطة<br>${x.e}</div>`}else{lives--;btn.classList.add("wrong");bs[x.a].classList.add("correct");play(false);document.getElementById("fb").innerHTML=`<div class="feedback" style="background:#fff0ef">❌ إجابة غير صحيحة<br><b>الإجابة الصحيحة:</b> ${x.o[x.a]}<br>${x.e}</div>`}document.getElementById("score").textContent=score;document.getElementById("lives").textContent=lives;document.getElementById("next").classList.remove("hidden")}
+function next(){idx++;if(idx>=20||lives<=0)finish();else render()}
+function finish(){document.getElementById("game").classList.add("hidden");document.getElementById("result").classList.remove("hidden");document.getElementById("final").textContent=score+" / 200";document.getElementById("msg").textContent=score>=180?"ممتاز جدًا! أداء علمي مميز 🌟":score>=140?"أداء رائع، واصل التقدم 🔬":"أحسنت المحاولة! راجع الدرس وأعد التحدي 💪"}
+function certificate(){document.getElementById("result").classList.add("hidden");document.getElementById("cert").classList.remove("hidden");document.getElementById("print").classList.remove("hidden");document.getElementById("cname").textContent=student;document.getElementById("cscore").textContent="النتيجة: "+score+" من 200 نقطة";window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})}
+function toggleSound(){sound=!sound;alert(sound?"تم تشغيل الصوت 🔊":"تم كتم الصوت 🔇")}
+function soundTest(){play(true)}
+function play(ok){if(!sound)return;try{let c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=ok?660:220;g.gain.value=.07;o.connect(g);g.connect(c.destination);o.start();o.frequency.exponentialRampToValueAtTime(ok?880:140,c.currentTime+.18);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.22);o.stop(c.currentTime+.23)}catch(e){}}
+</script>
+</body>
+</html>
